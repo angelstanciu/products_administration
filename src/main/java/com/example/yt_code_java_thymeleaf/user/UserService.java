@@ -13,15 +13,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> listAll() {
+    public List<User> findAllUsers() {
         return (List<User>) userRepository.findAll();
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User addUser(User user) {
+        return userRepository.save(user);
     }
 
-    public User getUser(Integer id) throws NoUserFoundException {
+    public User getUserById(Integer id) throws NoUserFoundException {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
@@ -29,7 +29,7 @@ public class UserService {
         throw new NoUserFoundException("No user found with ID " + id);
     }
 
-    public void delete(Integer id) throws NoUserFoundException {
+    public void deleteUserById(Integer id) throws NoUserFoundException {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()) {
             throw new NoUserFoundException("No user found !");

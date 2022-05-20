@@ -3,7 +3,6 @@ package com.example.yt_code_java_thymeleaf.user;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,7 @@ public class UserController {
 
     @GetMapping("/users")
     public String showAllUsers(ModelMap modelMap) {
-        List<User> userList = userService.listAll();
+        List<User> userList = userService.findAllUsers();
         modelMap.addAttribute("userList", userList);
         return "users";
     }
@@ -35,7 +34,7 @@ public class UserController {
 
     @PostMapping("users/save")
     public String saveUser(User user, RedirectAttributes redirectAttributes) {
-        userService.save(user);
+        userService.addUser(user);
         redirectAttributes.addFlashAttribute("message", "User saved succesfully!");
         return "redirect:/users";
     }
@@ -43,7 +42,7 @@ public class UserController {
     @GetMapping("/users/edit/{id}")
     public String showEditUserForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
-            User user = userService.getUser(id);
+            User user = userService.getUserById(id);
             model.addAttribute("user", user);
             model.addAttribute(
                     "pageTitle",
@@ -63,7 +62,7 @@ public class UserController {
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
-            userService.delete(id);
+            userService.deleteUserById(id);
             redirectAttributes.addFlashAttribute(
                     "message",
                     "The user has been deleted successfully !"

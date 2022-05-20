@@ -1,9 +1,14 @@
 package com.example.yt_code_java_thymeleaf.user;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,14 @@ public class User {
     private String lastName;
 
     private boolean enabled;
+
+    public User(String email, String password, String firstName, String lastName, boolean enabled) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enabled = enabled;
+    }
 
     public boolean isEnabled() {
         return enabled;
