@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -23,7 +25,7 @@ class UserServiceTest {
     private UserService userService;
 
     @Test
-    void listAllUsersTest() {
+    void findAllUsersTest() {
         // given
         User user1 = new User("user1@email.com", "pass1", "first1", "last1", false);
         User user2 = new User("user2@email.com", "pass2", "first2", "last2", true);
@@ -66,6 +68,16 @@ class UserServiceTest {
     }
 
     @Test
+    void getUserById_ExceptionTest() {
+        // given
+        when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        // then
+        assertThrows(NoUserFoundException.class,
+                () -> userService.getUserById(anyInt()));
+    }
+
+    @Test
     void deleteUserByIdTest() throws NoUserFoundException {
         User userToBeFound = new User(1,
                 "test@email.com",
@@ -78,5 +90,15 @@ class UserServiceTest {
         userService.deleteUserById(1);
 
         verify(userRepository, times(1)).deleteById(1);
+    }
+
+    @Test
+    void deleteUserById_ExceptionTest() {
+        // given
+        when(userRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        // then
+        assertThrows(NoUserFoundException.class,
+                () -> userService.deleteUserById(anyInt()));
     }
 }
