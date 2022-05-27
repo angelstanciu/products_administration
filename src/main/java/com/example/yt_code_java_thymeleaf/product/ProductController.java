@@ -22,7 +22,7 @@ public class UserController {
     public String showAllUsers(ModelMap modelMap) {
         List<User> userList = userService.findAllUsers();
         modelMap.addAttribute("userList", userList);
-        return "users";
+        return "admin-view";
     }
 
     @GetMapping("users/new")
