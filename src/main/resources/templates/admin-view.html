@@ -2,38 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Users</title>
+    <title>Manage Products</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
 <div class="container-fluid text-center">
-    <div><h1>Manage Users</h1></div>
+    <div><h1>Manage Products</h1></div>
     <div>
-        <a th:href="@{/users/new}">Add New User</a>
+        <a th:href="@{/products/admin/new}">Add New Product</a>
     </div>
     <div>
         <table class="table table-bordered">
             <thead class="table-dark">
             <tr>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>E-mail</th>
-                <th>Enabled</th>
-                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="user : ${userList}">
+            <th:block th:each="product : ${productList}">
                 <tr>
-                    <td>[[${user.id}]]</td>
-                    <td>[[${user.firstName}]]</td>
-                    <td>[[${user.lastName}]]</td>
-                    <td>[[${user.email}]]</td>
-                    <td>[[${user.enabled}]]</td>
+                    <td>[[${product.id}]]</td>
+                    <td>[[${product.name}]]</td>
+                    <td>[[${product.price}]]</td>
+                    <td>[[${product.quantity}]]</td>
                     <td>
-                        <a th:href="@{'users/edit/' + ${user.id}}">Edit</a>
-                        <a th:href="@{'users/delete/' + ${user.id}}">Delete</a>
+                        <a th:href="@{'admin/edit/' + ${product.id}}">Edit</a>
+                        <a th:href="@{'admin/delete/' + ${product.id}}">Delete</a>
                     </td>
                 </tr>
             </th:block>
@@ -42,5 +39,14 @@
         <div th:if="${message}" class="alert-success"> [[${message}]] </div>
     </div>
 </div>
+<div class="container-fluid text-center">
+    <button type="submit" class="btn btn-primary" onclick="logoutForm()">Login</button>
+</div>
+
+<script type="text/javascript">
+    function logoutForm() {
+        window.location = "/logout";
+    }
+</script>
 </body>
 </html>

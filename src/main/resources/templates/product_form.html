@@ -20,29 +20,21 @@
 <div class="container-fluid text-center">
     <div><h1>[[${pageTitle}]]</h1></div>
 
-    <form th:action="@{/users/save}" method="post" th:object="${user}">
+    <form th:action="@{/products/admin/save}" method="post" th:object="${product}">
         <input type="hidden" th:field="*{id}">
         <fieldset>
             <div>
                 <div>
-                    <label>E-mail</label>
-                    <input type="email" th:field="*{email}"/>
+                    <label>Name</label>
+                    <input type="text" th:field="*{name}"/>
                 </div>
                 <div>
-                    <label>First Name</label>
-                    <input type="text" th:field="*{firstName}"/>
+                    <label>Price</label>
+                    <input type="text" th:field="*{price}"/>
                 </div>
                 <div>
-                    <label>Last Name</label>
-                    <input type="text" th:field="*{lastName}"/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" th:field="*{password}"/>
-                </div>
-                <div>
-                    <label>Enabled</label>
-                    <input type="checkbox" th:field="*{enabled}">
+                    <label>Quantity</label>
+                    <input type="text" th:field="*{quantity}"/>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -58,7 +50,7 @@
 </div>
 <script type="text/javascript">
     function cancelForm() {
-        window.location = "/users";
+        window.location = "/products/admin";
     }
 </script>
 </body>

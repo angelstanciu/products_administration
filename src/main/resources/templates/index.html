@@ -4,11 +4,33 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <style>
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <div class="container-fluid text-center">
-        <h1>Welcome to my Application</h1>
-        <a class="h3" th:href="@{/users}">Manage Users</a>
-    </div>
+<div class="container-fluid text-center">
+    <h1>Welcome to my Application</h1>
+    <a class="h3" th:href="@{/products}">My Products</a>
+</div>
+
+<div class="container-fluid text-center">
+    <button type="submit" class="btn btn-primary" onclick="loginForm()">Login</button>
+</div>
+
+<script type="text/javascript">
+    function loginForm() {
+        window.location = "/login";
+    }
+</script>
+
 </body>
 </html>

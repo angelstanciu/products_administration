@@ -1,4 +1,4 @@
-package com.example.yt_code_java_thymeleaf;
+package com.example.springsecurity;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
